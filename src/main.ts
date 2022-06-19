@@ -1,7 +1,15 @@
 import * as core from '@actions/core'
+import * as event from './event'
+import * as version from './version'
 
-async function run(): Promise<void> {
+export async function run(): Promise<void> {
   try {
+    const tag = event.getCreatedTag()
+    
+      if (tag && version.isSemVer(tag)) {
+        // TODO
+      }
+
     core.setOutput('release-url', 'http://example.com')
   } catch (error) {
     if (error instanceof Error) core.setFailed(error.message)
